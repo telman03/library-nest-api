@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param  } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Patch  } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
 import { ApiTags } from '@nestjs/swagger';
@@ -21,5 +21,16 @@ export class BookController {
     @Get(':id')
     async findById(@Param("id") id: string): Promise<Book> {
         return this.bookService.findById(id);
+    }
+
+    @Patch(':id')
+    async updateById(@Param("id") id: string, @Body() book: Book): Promise<Book> {
+        //here i want to update only one parameter of the book
+        return this.bookService.updateById(id, book);
+    }
+
+    @Delete(':id')
+    async deleteById(@Param("id") id: string): Promise<Book> {
+        return this.bookService.deleteById(id);
     }
 }
