@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, Patch  } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Patch, UseGuards  } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateBookDto } from './dto/create-book.dto';
+import { HttpOnlyGuard } from '../auth/http-only.guard';
 @Controller('book')
 @ApiTags('books')
+@UseGuards(HttpOnlyGuard)
 export class BookController {
     constructor(private bookService: BookService) {}
 
