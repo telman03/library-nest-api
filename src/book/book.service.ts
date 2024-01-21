@@ -39,4 +39,6 @@ export class BookService {
         return await this.bookModel.findByIdAndDelete(id);
     }
 
+    // TODO: filtering books by category
+    // TODO: filtering books by 
 }

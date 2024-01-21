@@ -26,6 +26,7 @@ export class Book {
     @Prop()
     author: string;
 
+    // delete price and category from here
     @ApiProperty()
     @Prop()
     price: number;
