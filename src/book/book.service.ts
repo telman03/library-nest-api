@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Book, Category } from './schema/book.schema';
-import { User } from 'src/auth/schema/user.schema';
 import * as mongoose from 'mongoose';
 import { CreateBookDto } from './dto/create-book.dto';
+
 @Injectable()
 export class BookService {
    
@@ -52,5 +52,7 @@ export class BookService {
     }
 
     // TODO: filtering books by category
-    // TODO: filtering books by 
+    // TODO: filtering books by author
+    // TODO: updating only one parameter of the book
+
 }

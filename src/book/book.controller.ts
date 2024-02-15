@@ -6,7 +6,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateBookDto } from './dto/create-book.dto';
 import { HttpOnlyGuard } from '../auth/http-only.guard';
 import { Request } from 'express';
-import { decode } from 'punycode';
 
 @Controller('book')
 @ApiTags('books')
@@ -21,9 +20,10 @@ export class BookController {
 
     @Post()
     async create(@Body() book: CreateBookDto, @Req() request: Request): Promise<Book> {
-        const token = request.cookies; // Assuming user information is stored in a cookie named 'user'
-        // decode token and send the user details
+        const token = request.cookies; 
         
+        // Assuming user information is stored in a cookie named 'user'
+        // decode token and send the user details
 
         return this.bookService.create(book);    
     }
@@ -35,7 +35,9 @@ export class BookController {
 
     @Patch(':id')
     async updateById(@Param("id") id: string, @Body() book: Book): Promise<Book> {
-        //here i want to update only one parameter of the book
+        // here i want to update only one parameter of the book
+        // so i will use patch instead of put
+        
         return this.bookService.updateById(id, book);
     }
 
