@@ -1,6 +1,7 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import { SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
+import { User } from "src/auth/schema/user.schema";
 
 export enum Category {
     ADVENTURE = 'Adventure',
@@ -34,6 +35,10 @@ export class Book {
     @ApiProperty()
     @Prop()
     category:  Category;
+
+    // add user property here
+    @Prop()
+    user: User;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

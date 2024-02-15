@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, Patch, UseGuards  } from '@nestjs/common';
+import { User } from './../auth/schema/user.schema';
+import { Controller, Get, Post, Body, Param, Put, Delete, Patch, UseGuards, Req } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateBookDto } from './dto/create-book.dto';
 import { HttpOnlyGuard } from '../auth/http-only.guard';
-
+import { Request } from 'express';
+import { decode } from 'punycode';
 
 @Controller('book')
 @ApiTags('books')
@@ -18,9 +20,13 @@ export class BookController {
     }
 
     @Post()
-    async create(@Body() book: CreateBookDto): Promise<Book> {
-        return this.bookService.create(book);
-    }
+    async create(@Body() book: CreateBookDto, @Req() request: Request): Promise<Book> {
+        const token = request.cookies; // Assuming user information is stored in a cookie named 'user'
+        // decode token and send the user details
+        
+        const user =  await this.decodeToken(token);
+
+        return this.bookService.create(book, user);    }
 
     @Get(':id')
     async findById(@Param("id") id: string): Promise<Book> {
@@ -36,5 +42,15 @@ export class BookController {
     @Delete(':id')
     async deleteById(@Param("id") id: string): Promise<Book> {
         return this.bookService.deleteById(id);
+    }
+
+    @Get('author/:id')
+    async findByAuthor(@Param("id") author: string): Promise<Book[]> {
+        return this.bookService.findByAuthor(author);
+    }
+
+    async decodeToken(token: string): Promise<User> {
+        // decode the token and return the user details
+        return null;
     }
 }

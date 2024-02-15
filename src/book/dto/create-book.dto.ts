@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { User } from "src/auth/schema/user.schema";
 
 export class CreateBookDto {
     @ApiProperty()    
@@ -11,4 +12,5 @@ export class CreateBookDto {
     readonly category: string;
     @ApiProperty()
     readonly price: number;
+    user: any;
 }
