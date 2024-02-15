@@ -24,9 +24,9 @@ export class BookController {
         const token = request.cookies; // Assuming user information is stored in a cookie named 'user'
         // decode token and send the user details
         
-        const user =  await this.decodeToken(token);
 
-        return this.bookService.create(book, user);    }
+        return this.bookService.create(book);    
+    }
 
     @Get(':id')
     async findById(@Param("id") id: string): Promise<Book> {
@@ -47,10 +47,5 @@ export class BookController {
     @Get('author/:id')
     async findByAuthor(@Param("id") author: string): Promise<Book[]> {
         return this.bookService.findByAuthor(author);
-    }
-
-    async decodeToken(token: string): Promise<User> {
-        // decode the token and return the user details
-        return null;
     }
 }

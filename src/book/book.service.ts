@@ -16,7 +16,7 @@ export class BookService {
         return await this.bookModel.find();
     }
 
-    async create(bookDto: CreateBookDto, user: User): Promise<Book> {
+    async create(bookDto: CreateBookDto): Promise<Book> {
        const newBook = new this.bookModel({
         ...bookDto,
         // user: user // Assuming user information needs to be associated with the book
