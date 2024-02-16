@@ -37,7 +37,6 @@ export class BookController {
     async updateById(@Param("id") id: string, @Body() book: Book): Promise<Book> {
         // here i want to update only one parameter of the book
         // so i will use patch instead of put
-        
         return this.bookService.updateById(id, book);
     }
 
@@ -49,5 +48,10 @@ export class BookController {
     @Get('author/:id')
     async findByAuthor(@Param("id") author: string): Promise<Book[]> {
         return this.bookService.findByAuthor(author);
+    }
+
+    @Get('user/:id')
+    async findBy(@Param("id") user: string): Promise<Book[]> {
+        return null;
     }
 }

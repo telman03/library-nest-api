@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 
+// The @Schema() decorator is used to define a schema for a document in MongoDB.
 export enum Role {
     USER = 'user',
     ADMIN = 'admin',
@@ -10,6 +11,7 @@ export enum Role {
     timestamps: true
 })
 
+// The @Prop() decorator is used to define a property for a schema.
 export class User {
     @Prop()
     firstName: string;
