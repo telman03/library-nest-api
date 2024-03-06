@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, JwtModule } from '@nestjs/jwt';
 import { SignUpDto } from './dto/signup.dto';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,7 +13,7 @@ export class AuthService {
 
     constructor(@InjectModel('User') private readonly userModel: Model<User>,
         private jwt: JwtService
-    ) { }
+    ) {}
 
     async signUp(dto: SignUpDto) {
         const { email, password, firstName, lastName, role } = dto;
@@ -27,7 +27,6 @@ export class AuthService {
 
             // Hash password
             const hashedPassword = await this.hashPassword(password);
-
             // Create a new user
             const newUser = await this.userModel.create({
                 email: dto.email,
@@ -101,11 +100,8 @@ export class AuthService {
 
     async signout(req: Request, res: Response) {
         res.clearCookie('token');
-
         return res.send({ message: 'Logged out succefully' });
     }
-
-
 
 
     decodeToken(token: string): any {

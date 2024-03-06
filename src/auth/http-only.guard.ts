@@ -12,7 +12,6 @@ export class HttpOnlyGuard implements CanActivate {
       // The cookie is present
       return true;
     }
-
     // The cookie is not present, deny access
     return false;
   }

@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Book, Category } from './schema/book.schema';
 import * as mongoose from 'mongoose';
 import { CreateBookDto } from './dto/create-book.dto';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class BookService {
@@ -42,7 +43,6 @@ export class BookService {
         }
         return book;
     }
-
     async updateById(id: string, book: Book): Promise<Book> {
         return await this.bookModel.findByIdAndUpdate(id, book, {new: true});
     }

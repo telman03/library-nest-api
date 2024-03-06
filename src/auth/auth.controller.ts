@@ -9,24 +9,28 @@ import { UseGuards } from '@nestjs/common';
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
 
+  constructor(private authService: AuthService) {}
 
-  @Post('signup')
+  @Post('/signup')
   signUp(@Body() dto: SignUpDto) {
     return this.authService.signUp(dto);
   }
 
-  @Post('signin')
+  @Post('/signin')
   async signin(@Request() req, @Response() res, @Body() dto: SignInDto) {
     return this.authService.signIn(dto, req, res);
   }
 
-  @Get('logout')
+  @Get('/logout')
   async logout(@Request() req, @Response() res) {
     return this.authService.signout(req, res);
   }
 
+  @Get()
+  async getMe(@Request() req){
+    return this.authService.getMe(req)
+  }
 
   @Get('/profile')
   async getProfile(@Req() req: ExpressRequest) {
@@ -46,7 +50,6 @@ export class AuthController {
       role: user.role,
     };
   }
-
 
 
   @Get('protected')
